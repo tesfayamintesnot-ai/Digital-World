@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Store - Telegram Stars, Premium & Tinder Accounts</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customPurple: '#6366f1',
+                        customPink: '#ec4899',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-600 min-h-screen font-sans text-gray-800 flex flex-col justify-center items-center p-4">
+
+    <!-- PAGE 1: AUTHENTICATION CONTAINER -->
+    <div id="auth-page" class="w-full max-w-5xl mx-auto">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white text-center mb-8 drop-shadow-md">
+            Login & Sign up Minte Store
+        </h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center">
+            
+            <!-- LOGIN CARD -->
+            <div id="login-card" class="bg-white/95 backdrop-blur-md rounded-3xl p-8 shadow-2xl w-full max-w-md transition-all duration-300">
+                <div class="flex flex-col items-center mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg mb-3">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Login</h2>
+                </div>
+
+                <form onsubmit="handleAuth(event, 'login')" class="space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</label>
+                            <a href="#" class="text-xs text-indigo-600 hover:underline">Forgot password?</a>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" required placeholder="Enter your email" 
+                                class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">Password</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" required placeholder="Enter your password" 
+                                class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:opacity-95 transition transform active:scale-95">
+                        Log In
+                    </button>
+                </form>
+
+                <div class="relative flex py-4 items-center">
+                    <div class="flex-grow border-t border-gray-200"></div>
+                    <span class="flex-shrink mx-4 text-gray-400 text-xs uppercase tracking-wider">or continue with</span>
+                    <div class="flex-grow border-t border-gray-200"></div>
+                </div>
+
+                <div class="flex justify-center space-x-4">
+                    <button onclick="handleSocialLogin('Google')" class="w-12 h-12 rounded-full bg-white border border-gray-200 shadow flex items-center justify-center hover:bg-gray-50 transition">
+                        <i class="fa-brands fa-google text-red-500 text-lg"></i>
+                    </button>
+                    <button onclick="handleSocialLogin('Facebook')" class="w-12 h-12 rounded-full bg-white border border-gray-200 shadow flex items-center justify-center hover:bg-gray-50 transition">
+                        <i class="fa-brands fa-facebook-f text-blue-600 text-lg"></i>
+                    </button>
+                </div>
+
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    Not registered yet? <button onclick="switchAuthView('signup')" class="text-indigo-600 font-semibold hover:underline">Sign Up &gt;</button>
+                </p>
+            </div>
+
+            <!-- SIGN UP CARD -->
+            <div id="signup-card" class="bg-white/95 backdrop-blur-md rounded-3xl p-8 shadow-2xl w-full max-w-md transition-all duration-300">
+                <div class="flex flex-col items-center mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg mb-3">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Sign Up</h2>
+                </div>
+
+                <form onsubmit="handleAuth(event, 'signup')" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">Name</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input type="text" required placeholder="Enter your name" 
+                                class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">Email</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" required placeholder="Enter your email" 
+                                class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">Password</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" required placeholder="Create a password" 
+                                class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl shadow-lg hover:opacity-95 transition transform active:scale-95">
+                        Sign Up MinteStore
+                    </button>
+                </form>
+
+                <div class="relative flex py-4 items-center">
+                    <div class="flex-grow border-t border-gray-200"></div>
+                    <span class="flex-shrink mx-4 text-gray-400 text-xs uppercase tracking-wider">or continue with</span>
+                    <div class="flex-grow border-t border-gray-200"></div>
+                </div>
+
+                <div class="flex justify-center space-x-4">
+                    <button onclick="handleSocialLogin('Google')" class="w-12 h-12 rounded-full bg-white border border-gray-200 shadow flex items-center justify-center hover:bg-gray-50 transition">
+                        <i class="fa-brands fa-google text-red-500 text-lg"></i>
+                    </button>
+                    <button onclick="handleSocialLogin('Facebook')" class="w-12 h-12 rounded-full bg-white border border-gray-200 shadow flex items-center justify-center hover:bg-gray-50 transition">
+                        <i class="fa-brands fa-facebook-f text-blue-600 text-lg"></i>
+                    </button>
+                </div>
+
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    Already have an account? <button onclick="switchAuthView('login')" class="text-pink-600 font-semibold hover:underline">Log In &gt;</button>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- PAGE 2: PRODUCT STOREFRONT (Hidden by default) -->
+    <div id="store-page" class="hidden w-full max-w-6xl mx-auto py-6">
+        <!-- Store Header -->
+        <div class="flex justify-between items-center mb-10 bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 shadow-xl">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-white">Digital Product Storefront</h1>
+                <p class="text-pink-200 text-sm">Instant automated checkout via Telegram chat</p>
+            </div>
+            <button onclick="logoutToAuth()" class="px-5 py-2.5 bg-white/20 hover:bg-white/30 text-white font-medium rounded-xl transition border border-white/30 flex items-center gap-2">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+            </button>
+        </div>
+
+        <!-- Responsive Grid of 3 Product Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- PRODUCT 1: TELEGRAM STARS (100 - 1000) -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-between transition transform hover:-translate-y-2 duration-300">
+                <div>
+                    <div class="h-48 bg-gradient-to-tr from-yellow-400 to-amber-500 flex items-center justify-center relative">
+                        <i class="fa-solid fa-star text-white text-6xl drop-shadow-lg animate-pulse"></i>
+                        <span class="absolute top-4 right-4 bg-white/90 text-amber-700 text-xs font-bold px-3 py-1 rounded-full shadow">Instant Topup</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Telegram Stars</h3>
+                        <p class="text-gray-500 text-xs mb-4">Choose your custom amount from 100 to 1000 stars.</p>
+                        
+                        <!-- Options Selector -->
+                        <div class="mb-4">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Select Package</label>
+                            <select id="stars-select" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm font-medium">
+                                <option value="100 Stars - $2.5">100 Stars - $2.5</option>
+                                <option value="250 Stars - $6.5">250 Stars - $6.5</option>
+                                <option value="500 Stars - $12.5" selected>500 Stars - $12.5</option>
+                                <option value="1000 Stars - $22.99">1000 Stars - $22.99</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="buyTelegramStars()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-600 hover:opacity-95 text-white font-semibold rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-telegram text-xl"></i> Buy Stars Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 2: TELEGRAM PREMIUM (1, 3, 6, 12 Months) -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-between transition transform hover:-translate-y-2 duration-300">
+                <div>
+                    <div class="h-48 bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center relative">
+                        <i class="fa-solid fa-bolt text-white text-6xl drop-shadow-lg"></i>
+                        <span class="absolute top-4 right-4 bg-white/90 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full shadow">Best Value</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Telegram Premium</h3>
+                        <p class="text-gray-500 text-xs mb-4">Unlock maximum speed, larger files & exclusive perks.</p>
+                        
+                        <!-- Options Selector -->
+                        <div class="mb-4">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Subscription Period</label>
+                            <select id="premium-select" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 text-sm font-medium">
+                                <option value="1 Month - $5.5">1 Month - $5.5</option>
+                                <option value="3 Months - $15.5" selected>3 Months - $15.5</option>
+                                <option value="6 Months - $28.99">6 Months - $28.99</option>
+                                <option value="1 Year - $49.99">1 Year (12 Months) - $49.99</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="buyTelegramPremium()" class="w-full py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:opacity-95 text-white font-semibold rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-telegram text-xl"></i> Buy Premium Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 3: TINDER ACCOUNTS (2015-2024 & 2025) -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-between transition transform hover:-translate-y-2 duration-300">
+                <div>
+                    <div class="h-48 bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center relative">
+                        <i class="fa-solid fa-fire text-white text-6xl drop-shadow-lg"></i>
+                        <span class="absolute top-4 right-4 bg-white/90 text-rose-700 text-xs font-bold px-3 py-1 rounded-full shadow">Aged & Fresh</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Tinder Accounts</h3>
+                        <p class="text-gray-500 text-xs mb-4">Choose from Tinder accounts (2015-2024) or brand new 2025 profiles.</p>
+                        
+                        <!-- Options Selector -->
+                        <div class="mb-4">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Account Category</label>
+                            <select id="tinder-select" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-rose-500 text-sm font-medium">
+                                <option value="Tinder 2025 Account - $12$" selected>Tinder 2025 Account - $12$</option>
+                                <option value="Tinder 2024 Aged Account - $18">Tinder 2024 Account - $18</option>
+                                <option value="Tinder 2015-2023 Vintage Account - $22">Tinder 2015-2023 Account - $22</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 space-y-2">
+                    <!-- Buy/Sell Button -->
+                    <button onclick="buyTinderAccount()" class="w-full py-2.5 bg-gradient-to-r from-rose-500 to-pink-600 hover:opacity-95 text-white font-semibold rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-brands fa-telegram text-lg"></i> Buy Tinder 
+                    </button>
+                    <!-- Sell Tinder Button -->
+                    <button onclick="sellTinderAccount()" class="w-full py-2 bg-gray-100 hover:bg-gray-200 text-rose-600 font-semibold rounded-xl transition border border-rose-200 flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-hand-holding-dollar"></i> Sell Tinder Accounts to Us
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Check local storage on page load to keep user logged in if already authenticated
+        window.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                document.getElementById('auth-page').classList.add('hidden');
+                document.getElementById('store-page').classList.remove('hidden');
+            }
+        });
+
+        // Toggle view handler for mobile screens
+        function switchAuthView(view) {
+            const loginCard = document.getElementById('login-card');
+            const signupCard = document.getElementById('signup-card');
+            
+            if (window.innerWidth < 768) {
+                if (view === 'signup') {
+                    loginCard.classList.add('hidden');
+                    signupCard.classList.remove('hidden');
+                } else {
+                    signupCard.classList.add('hidden');
+                    loginCard.classList.remove('hidden');
+                }
+            }
+        }
+
+        // Handle Form Submissions (Saves login state so user stays logged in)
+        function handleAuth(event, type) {
+            event.preventDefault();
+            localStorage.setItem('isLoggedIn', 'true'); // Save session
+            document.getElementById('auth-page').classList.add('hidden');
+            document.getElementById('store-page').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // Handle Social Logins
+        function handleSocialLogin(provider) {
+            localStorage.setItem('isLoggedIn', 'true'); // Save session
+            alert(`Logging in with ${provider}... Redirecting to store.`);
+            document.getElementById('auth-page').classList.add('hidden');
+            document.getElementById('store-page').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // Logout back to authentication screen and clear session memory
+        function logoutToAuth() {
+            localStorage.removeItem('isLoggedIn'); // Clear session
+            document.getElementById('store-page').classList.add('hidden');
+            document.getElementById('auth-page').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // Telegram Checkout triggers with selected option details
+        function buyTelegramStars() {
+            const selectedOption = document.getElementById('stars-select').value;
+            const message = `Hello, I would like to purchase Telegram Stars: ${selectedOption}. Please provide payment instructions.`;
+            openTelegram(message);
+        }
+
+        function buyTelegramPremium() {
+            const selectedOption = document.getElementById('premium-select').value;
+            const message = `Hello, I would like to buy Telegram Premium (${selectedOption}). Please guide me through the setup.`;
+            openTelegram(message);
+        }
+
+        function buyTinderAccount() {
+            const selectedOption = document.getElementById('tinder-select').value;
+            const message = `Hello, I want to buy a Tinder account: ${selectedOption}. Let me know availability.`;
+            openTelegram(message);
+        }
+
+        function sellTinderAccount() {
+            const selectedOption = document.getElementById('tinder-select').value;
+            const message = `Hello, I am interested in SELLING my Tinder accounts to you (Reference type: ${selectedOption}). What are your requirements and rates?`;
+            openTelegram(message);
+        }
+
+        // Helper to open Telegram with pre-filled encoded text
+        function openTelegram(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const telegramUrl = `https://t.me/MinteHub?text=${encodedMessage}`;
+            window.open(telegramUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
